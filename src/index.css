@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Glow Animations */
+.glow {
+  text-shadow: 0 0 8px #00F0FF, 0 0 24px #00F0FF, 0 0 40px #FF00EA;
+}
+.bg-animated {
+  background: linear-gradient(120deg, #0f172a 0%, #1e293b 50%, #00f0ff 100%);
+  background-size: 200% 200%;
+  animation: gradientMove 6s ease-in-out infinite;
+}
+@keyframes gradientMove {
+  0%, 100% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+}

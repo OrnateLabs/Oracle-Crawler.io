@@ -1,0 +1,59 @@
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+import time
+import csv
+
+urls = [
+    "https://www.youtube.com",
+    "https://www.google.com",
+    "https://www.microsoft.com/edge",
+    "https://scratch.mit.edu",
+    "https://www.wikipedia.org",
+    "https://x.com",
+    "https://www.instagram.com",
+    "https://github.com",
+    "https://info.cern.ch"
+]
+
+def get_domain(url):
+    return urlparse(url).netloc
+
+def crawl(url):
+    headers = {
+        "User-Agent": "OracleIntelligenceBot/1.0 (polite crawler for research, contact: info@yourdomain.com)"
+    }
+    try:
+        resp = requests.get(url, headers=headers, timeout=5)
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, 'html.parser')
+        title = soup.title.string.strip() if soup.title else 'No title'
+        text = soup.get_text(separator=' ', strip=True)
+        first_words = ' '.join(text.split()[:10])  # First 10 words
+        return {
+            'domain': get_domain(url),
+            'title': title,
+            'first_words': first_words
+        }
+    except Exception as e:
+        return {
+            'domain': get_domain(url),
+            'title': f"Failed to crawl: {e}",
+            'first_words': ""
+        }
+
+results = []
+for url in urls:
+    data = crawl(url)
+    results.append(data)
+    time.sleep(2)  # polite crawling
+
+# Write to CSV for indexing
+with open('crawl_index.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    fieldnames = ['domain', 'title', 'first_words']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    for row in results:
+        writer.writerow(row)
+
+print("Indexing complete. Results saved in crawl_index.csv.")

@@ -1,0 +1,14 @@
+This repository contains code for a web crawler (bot) and assistive AI intended for research and educational purposes only.
+
+Usage Disclaimer
+The creator and contributors of this crawler are not responsible for any consequences, damages, or legal issues that arise from the use, misuse, or abuse of this software.
+If any website, domain, or service expresses dissatisfaction, blocks, or restricts access due to crawling activity, it is solely the responsibility of the end-user.
+Users are expected to review and comply with the Terms of Service, robots.txt, and rate limits of any website they crawl.
+This crawler is provided "as is" without warranty of any kind.
+Respect for Website Rules
+Many websites have explicit rules regarding automated access (bots, crawlers, scrapers).
+Always consult and honor these rules before running this crawler against any target.
+If a website requests that you stop crawling or blocks your bot, you must cease activity immediately.
+The maintainer of this repository disclaims all liability for actions performed by third parties using this code.
+Acknowledgement
+By using this code, you acknowledge and agree to these terms.
